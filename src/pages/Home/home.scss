@@ -1,0 +1,14 @@
+@use 'src/styles/animations';
+
+.home {
+    margin-top: 5rem;
+
+    &__greet {
+        text-align: center;
+        animation: fadeIn .3s cubic-bezier(0.36, 0, 0.66, -0.56);
+    }
+
+    &__grid {
+        animation: fadeIn .5s cubic-bezier(0.36, 0, 0.66, -0.56);
+    }
+}
