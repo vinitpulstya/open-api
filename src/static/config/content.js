@@ -1,7 +1,7 @@
 import IMG_ALL_API from "../images/icon-for-api.jpg";
 import IMG_CATEGORY_API from "../images/category.jpg";
 import IMG_RANDOM_API from "../images/random.jpg";
-import { URL_ALL, URL_CATEGORIES, URL_RANDOM } from "./urls";
+import { URL_ENTRIES, URL_CATEGORIES, URL_RANDOM } from "./urls";
 
 const home_page = {
   cards: [
@@ -10,7 +10,7 @@ const home_page = {
       title: "Browse All",
       description:
         "Find API for your project from the complete list made available by'public-apis'.",
-      link: URL_ALL,
+      link: URL_ENTRIES,
     },
     {
       img: IMG_CATEGORY_API,
@@ -31,7 +31,7 @@ const header_links = {
   appRoutes: [
     {
       name: "All",
-      link: URL_ALL,
+      link: URL_ENTRIES,
     },
     {
       name: "Random",
@@ -59,3 +59,6 @@ export const SEARCH_OPTS = {
   cors: undefined,
   category: undefined
 };
+
+// used for lazy loading from list
+export const APIs_PER_PAGE = 10;

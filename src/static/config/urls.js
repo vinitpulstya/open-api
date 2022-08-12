@@ -8,6 +8,6 @@ export const URL_GET_HEALTH = `${BASE_URL}/health`;
 // APP ROUTES
 
 export const URL_HOME = '';
-export const URL_ALL = '/all';
+export const URL_ENTRIES = '/all';
 export const URL_CATEGORIES = '/categories';
 export const URL_RANDOM = '/random';

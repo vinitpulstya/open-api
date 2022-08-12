@@ -10,7 +10,7 @@ export default function ImageCard({ img, title, description, link }) {
 
   return (
     <Card
-      sx={{ maxWidth: 345, minWidth: 345, marginBottom: "3rem" }}
+      sx={{ width: 345, marginBottom: "3rem" }}
       onClick={() => {
         navigate(link);
       }}

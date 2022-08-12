@@ -56,11 +56,11 @@ export const AppStateContextProvider = (props) => {
     try {
         const entries = await getEntries(params);
         setEntries(entries);
+        console.log(entries);
     } catch(err) {
         console.error(err);
     }
   }
-
   const changeSearchOpts = (opts) => {
     setSearchOpts(prevStateObj => {
       const newOpts = {...prevStateObj, ...opts}

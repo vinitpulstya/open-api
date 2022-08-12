@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { CircularProgress, Grid } from "@mui/material";
 import { useContext, useEffect } from "react";
 import BasicCard from "../../components/BasicCard/BasicCard";
 import DisplayCount from "../../components/DisplayCount/DisplayCount";
@@ -12,12 +12,12 @@ const Categories = () => {
   }, [ctx]);
 
   if (!(ctx.categories && ctx.categories.count)) {
-    return <h2>Loading</h2>;
+    return <CircularProgress />;
   }
 
   return (
     <div className="categories">
-      <DisplayCount text="Availabe Categories" count={ctx.categories.count}/>
+      <DisplayCount text="Availabe Categories" count={ctx.categories.count} />
       <Grid
         container
         justifyContent="space-evenly"
@@ -25,7 +25,7 @@ const Categories = () => {
       >
         {ctx.categories.categories &&
           ctx.categories.categories.map((category) => (
-            <BasicCard title={category} key={category}/>
+            <BasicCard title={category} key={category} />
           ))}
       </Grid>
     </div>

@@ -10,8 +10,14 @@ export const isObjectEmpty = (obj) => {
 };
 
 export const getQueryString = (params) => {
-  const queryString = Object.keys(params)
-    .map((key) => key + "=" + params[key])
+  const valid_obj = {};
+  for (let param of Object.keys(params)) {
+    if (params[param]) {
+      valid_obj[param] = params[param];
+    }
+  }
+  const queryString = Object.keys(valid_obj)
+    .map((key) => key + "=" + valid_obj[key])
     .join("&");
   return queryString;
 };

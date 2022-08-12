@@ -8,7 +8,7 @@ import './basicCard.scss';
 
 export default function BasicCard({ title }) {
   return (
-    <Card sx={{ minWidth: 275, maxWidth: 275, marginBottom: "3rem" }} className="basicCard">
+    <Card sx={{ width: 275, marginBottom: "3rem" }} className="basicCard">
       <CardContent>
         <Typography variant="h5" component="div">
           {title}
