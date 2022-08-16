@@ -62,3 +62,8 @@ export const SEARCH_OPTS = {
 
 // used for lazy loading from list
 export const APIs_PER_PAGE = 10;
+
+export const entries_page = {
+  CORS_OPTS: ['Yes', 'No', 'Unknown'],
+  HTTPS_OPTS: ['HTTPS only', 'Excluding HTTPS']
+};

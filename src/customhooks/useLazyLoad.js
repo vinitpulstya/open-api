@@ -20,17 +20,28 @@ const reducer = (state, action) => {
         currentPage: state.currentPage + 1
       };
     }
+
+    case "reset":
+      return action.state;
+      
     default:
       return state;
   }
 };
 
+export let RESET_HOOK = () => {};
+
 const useLazyLoad = ({ triggerRef, onGrabData, options }) => {
-  const [state, dispatch] = useReducer(reducer, {
+  const INIT_STATE = {
     loading: false,
     currentPage: 1,
     data: []
-  });
+  }
+  const [state, dispatch] = useReducer(reducer, INIT_STATE);
+
+  RESET_HOOK = () => {
+    dispatch({type: 'reset', state: INIT_STATE})
+  };
 
   const _handleEntry = async (entry) => {
     const boundingRect = entry.boundingClientRect;

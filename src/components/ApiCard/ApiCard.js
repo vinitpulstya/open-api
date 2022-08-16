@@ -57,7 +57,7 @@ const ApiCard = ({ API, Auth, Category, Cors, Description, HTTPS, Link }) => {
 const AuthInfo = ({ Auth }) => {
   return (
     <Typography variant="overline" gutterBottom component="span">
-      Auth {Auth ? Auth : "unknown"}
+      Auth {Auth ? Auth : <span style={{color:"green"}}>open</span>}
     </Typography>
   );
 };

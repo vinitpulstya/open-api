@@ -5,24 +5,40 @@ import "./entries.scss";
 
 import LazyAPIs from "../../components/LazyAPIs/LazyAPIs";
 import { CircularProgress } from "@mui/material";
+import Filter from "../../components/Filter/Filter";
 
 const Entries = () => {
   const ctx = useContext(AppStateContext);
-  let { entries, setEntries, searchOpts } = ctx;
+  let { entries, setEntries, searchOpts, categories, setCategories } = ctx;
 
   useEffect(() => {
     setEntries(searchOpts);
   }, [searchOpts]);
 
-  if (!(entries && entries.count)) {
-    return <CircularProgress />;
+  useEffect(() => {
+    setCategories();
+  }, []);
+
+  if (!(entries && entries.count) || !(categories && categories.categories)) {
+    if(entries.count === 0) {
+      return <>
+        <Filter />
+        <h2>No data found!</h2>
+      </>
+    }
+    return (
+      <div style={{ textAlign: "center" }}>
+        <CircularProgress />
+      </div>
+    );
   }
 
   return (
-    <div>
+    <>
+      <Filter />
       <DisplayCount text="Available API's" count={entries.count} />
       <LazyAPIs entries={entries} />
-    </div>
+    </>
   );
 };
 

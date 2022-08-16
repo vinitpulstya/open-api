@@ -27,9 +27,10 @@ export const AppStateContextProvider = (props) => {
     };
 
     const existingSearchOpts = localStorage.getItem('searchOpts');
-    if(existingSearchOpts) {
+    if(existingSearchOpts && !isObjectEmpty(JSON.parse(existingSearchOpts))) {
       setSearchOpts(JSON.parse(existingSearchOpts));
     }
+    console.log(searchOpts)
   }, []);
 
   const changeTheme = (themeType) => {
@@ -62,10 +63,12 @@ export const AppStateContextProvider = (props) => {
     }
   }
   const changeSearchOpts = (opts) => {
+    console.log(opts)
     setSearchOpts(prevStateObj => {
-      const newOpts = {...prevStateObj, ...opts}
+      const newOpts = {...prevStateObj, ...opts};
+      localStorage.setItem('searchOpts', JSON.stringify(newOpts));
       return newOpts;
-    })
+    });
   }
 
   return (

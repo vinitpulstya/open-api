@@ -12,7 +12,7 @@ export const isObjectEmpty = (obj) => {
 export const getQueryString = (params) => {
   const valid_obj = {};
   for (let param of Object.keys(params)) {
-    if (params[param]) {
+    if (params[param] !== null && params[param] !== undefined) {
       valid_obj[param] = params[param];
     }
   }
