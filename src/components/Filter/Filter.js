@@ -5,14 +5,22 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import AppStateContext from "../../services/app-state-context";
 import { entries_page } from "../../static/config/content";
 
 const Filter = () => {
   const ctx = useContext(AppStateContext);
   let { searchOpts, categories, setSearchOpts } = ctx;
+  let [title, setTitle] = useState(searchOpts.title);
+  let timer = useRef(undefined);
 
+  useEffect(() => {
+    clearTimeout(timer.current);
+    timer.current = setTimeout(() => {
+        setSearchOpts({title: title});
+    }, 500)
+  }, [title]);
 
   const handleProtocolChange = (e, newValue) => {
     let new_val = undefined;
@@ -42,13 +50,14 @@ const Filter = () => {
     <>
       <div className="searchbox">
         <TextField
-          value={searchOpts.title}
+          value={title}
           label="Search"
           id="searchBox"
           fullWidth
-          onChange={(e) => {
-            
-          }}
+          onChange={(e) => setTitle(e.target.value)}
+          //   onChange={(e) => {
+          //     setSearchOpts({ title: e.target.value });
+          //   }}
         />
       </div>
       <Grid

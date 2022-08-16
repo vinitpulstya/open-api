@@ -30,7 +30,7 @@ export const AppStateContextProvider = (props) => {
     if(existingSearchOpts && !isObjectEmpty(JSON.parse(existingSearchOpts))) {
       setSearchOpts(JSON.parse(existingSearchOpts));
     }
-    console.log(searchOpts)
+    // console.log(searchOpts)
   }, []);
 
   const changeTheme = (themeType) => {
@@ -49,7 +49,7 @@ export const AppStateContextProvider = (props) => {
         console.error(err);
       }
     } else {
-      console.log("this data already exists", categories);
+      // console.log("this data already exists", categories);
     }
   };
 
@@ -57,13 +57,13 @@ export const AppStateContextProvider = (props) => {
     try {
         const entries = await getEntries(params);
         setEntries(entries);
-        console.log(entries);
+        // console.log(entries);
     } catch(err) {
         console.error(err);
     }
   }
   const changeSearchOpts = (opts) => {
-    console.log(opts)
+    // console.log(opts)
     setSearchOpts(prevStateObj => {
       const newOpts = {...prevStateObj, ...opts};
       localStorage.setItem('searchOpts', JSON.stringify(newOpts));
