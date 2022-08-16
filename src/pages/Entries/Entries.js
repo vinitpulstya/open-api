@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import DisplayCount from "../../components/DisplayCount/DisplayCount";
 import AppStateContext from "../../services/app-state-context";
 import "./entries.scss";
@@ -9,22 +9,26 @@ import Filter from "../../components/Filter/Filter";
 
 const Entries = () => {
   const ctx = useContext(AppStateContext);
-  let { entries, setEntries, searchOpts, categories, setCategories } = ctx;
+  let { entries, categories } = ctx;
 
-  useEffect(() => {
-    setEntries(searchOpts);
-  }, [searchOpts]);
+  // useEffect(() => {
+  //   setEntries(searchOpts);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [searchOpts]);
 
-  useEffect(() => {
-    setCategories();
-  }, []);
+  // useEffect(() => {
+  //   setCategories();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   if (!(entries && entries.count) || !(categories && categories.categories)) {
-    if(entries.count === 0) {
-      return <>
-        <Filter />
-        <h2>No data found!</h2>
-      </>
+    if (entries.count === 0) {
+      return (
+        <>
+          <Filter />
+          <h2>No data found!</h2>
+        </>
+      );
     }
     return (
       <div style={{ textAlign: "center" }}>

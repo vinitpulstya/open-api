@@ -1,5 +1,6 @@
 import {
   Autocomplete,
+  Button,
   Grid,
   Switch,
   TextField,
@@ -9,17 +10,25 @@ import { useContext, useEffect, useRef, useState } from "react";
 import AppStateContext from "../../services/app-state-context";
 import { entries_page } from "../../static/config/content";
 
-const Filter = () => {
+const Filter = (props) => {
   const ctx = useContext(AppStateContext);
   let { searchOpts, categories, setSearchOpts } = ctx;
-  let [title, setTitle] = useState(searchOpts.title);
+  const [title, setTitle] = useState(searchOpts.title ? searchOpts.title : '');
+  const [showOtherFilters, setShowOtherFilters] = useState(false);
   let timer = useRef(undefined);
+  const isInitialMount = useRef(true);
 
   useEffect(() => {
-    clearTimeout(timer.current);
-    timer.current = setTimeout(() => {
-        setSearchOpts({title: title});
-    }, 500)
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      // useEffect code here to be run on update
+      clearTimeout(timer.current);
+      timer.current = setTimeout(() => {
+        setSearchOpts({ title: title });
+      }, 500);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [title]);
 
   const handleProtocolChange = (e, newValue) => {
@@ -32,6 +41,7 @@ const Filter = () => {
       case "Excluding HTTPS":
         new_val = false;
         break;
+
       default:
         new_val = undefined;
         break;
@@ -46,6 +56,7 @@ const Filter = () => {
       setSearchOpts({ auth: undefined });
     }
   };
+
   return (
     <>
       <div className="searchbox">
@@ -59,12 +70,18 @@ const Filter = () => {
           //     setSearchOpts({ title: e.target.value });
           //   }}
         />
+        <Button
+          onClick={() => setShowOtherFilters((prevState) => !prevState)}
+          style={{ paddingBottom: "1rem" }}
+        >
+          {showOtherFilters ? "Hide advanced filters" : "Show advanced filters"}
+        </Button>
       </div>
       <Grid
         id="other_filters"
         container
         justifyContent="space-evenly"
-        style={{ marginTop: "2rem" }}
+        style={{ marginTop: "1rem", display: showOtherFilters ? "" : "none" }}
       >
         <div className="filter_opt">
           <Autocomplete
@@ -88,16 +105,6 @@ const Filter = () => {
             onChange={(e, newValue) => setSearchOpts({ cors: newValue })}
           />
         </div>
-        {/* <div className="filter_opt">
-          <Typography variant="overline" display="inline">
-            HTTPS Only
-          </Typography>
-          <Switch
-            checked={searchOpts.https}
-            // onChange={handleChange}
-            inputProps={{ "aria-label": "HTTPS Only" }}
-          />
-        </div> */}
         <div className="filter_opt">
           <Autocomplete
             disablePortal

@@ -6,6 +6,7 @@ import NotFound from "./pages/NotFound/NotFound";
 import Categories from "./pages/Categories/Categories";
 import { URL_ENTRIES, URL_CATEGORIES, URL_RANDOM } from "./static/config/urls";
 import Entries from "./pages/Entries/Entries";
+import Random from "./pages/Random/Random";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route exact path={URL_ENTRIES} element={<Entries />} />
         <Route exact path={URL_CATEGORIES} element={<Categories />} />
+        <Route exact path={URL_RANDOM} element={<Random />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

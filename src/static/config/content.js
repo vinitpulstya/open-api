@@ -51,13 +51,22 @@ const header_links = {
 export { home_page, header_links};
 
 
+// export const SEARCH_OPTS = {
+//   title: undefined,
+//   description: undefined,
+//   auth: undefined,
+//   https: undefined,
+//   cors: undefined,
+//   category: undefined
+// };
+
 export const SEARCH_OPTS = {
-  title: undefined,
-  description: undefined,
-  auth: undefined,
-  https: undefined,
-  cors: undefined,
-  category: undefined
+  title: null,
+  description: null,
+  auth: null,
+  https: null,
+  cors: null,
+  category: null
 };
 
 // used for lazy loading from list
