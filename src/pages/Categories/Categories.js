@@ -1,5 +1,5 @@
 import { CircularProgress, Grid } from "@mui/material";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import BasicCard from "../../components/BasicCard/BasicCard";
 import DisplayCount from "../../components/DisplayCount/DisplayCount";
 import AppStateContext from "../../services/app-state-context";
@@ -7,9 +7,9 @@ import AppStateContext from "../../services/app-state-context";
 const Categories = () => {
   const ctx = useContext(AppStateContext);
 
-  useEffect(() => {
-    ctx.setCategories();
-  }, [ctx]);
+  // useEffect(() => {
+  //   ctx.setCategories();
+  // }, [ctx]);
 
   if (!(ctx.categories && ctx.categories.count)) {
     return <CircularProgress />;

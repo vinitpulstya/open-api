@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import { SEARCH_OPTS } from "../static/config/content";
 import { getCategories, getEntries } from "./data-fetch-service";
 import { isObjectEmpty } from "./utils";
@@ -19,6 +19,7 @@ export const AppStateContextProvider = (props) => {
   const [categories, setCategories] = useState({});
   const [entries, setEntries] = useState({});
   const [searchOpts, setSearchOpts] = useState(SEARCH_OPTS);
+  const initialMountState = useRef(true);
 
   useEffect(() => {
     const preSelectedTheme = localStorage.getItem("theme");
@@ -29,13 +30,20 @@ export const AppStateContextProvider = (props) => {
     const existingSearchOpts = localStorage.getItem("searchOpts");
     if (existingSearchOpts && !isObjectEmpty(JSON.parse(existingSearchOpts))) {
       setSearchOpts(JSON.parse(existingSearchOpts));
+    } else {
+      fetchEntries(searchOpts);
     }
     fetchCategories();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    fetchEntries(searchOpts);
+    if (initialMountState.current) {
+      initialMountState.current = false;
+    } else {
+      // useEffect code here to be run on update
+      fetchEntries(searchOpts);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchOpts]);
 
