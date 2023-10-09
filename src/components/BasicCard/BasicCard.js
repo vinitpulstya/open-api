@@ -4,9 +4,9 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import './basicCard.scss';
+import "./basicCard.scss";
 
-export default function BasicCard({ title }) {
+export default function BasicCard({ title, clickHandler }) {
   return (
     <Card sx={{ width: 275, marginBottom: "3rem" }} className="basicCard">
       <CardContent>
@@ -15,7 +15,9 @@ export default function BasicCard({ title }) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Browse Category</Button>
+        <Button size="small" onClick={ () => clickHandler(title)}>
+          Browse Category
+        </Button>
       </CardActions>
     </Card>
   );

@@ -1,6 +1,6 @@
 import { createContext, useEffect, useRef, useState } from "react";
 import { SEARCH_OPTS } from "../static/config/content";
-import { getCategories, getEntries } from "./data-fetch-service";
+import { getCategories, getEntries, getRandom } from "./data-fetch-service";
 import { isObjectEmpty } from "./utils";
 
 const AppStateContext = createContext({
@@ -10,6 +10,8 @@ const AppStateContext = createContext({
   setCategories: () => {},
   entries: {},
   setEntries: (params) => {},
+  random: {},
+  setRandom: (params) => {},
   searchOpts: SEARCH_OPTS,
   setSearchOpts: (opts) => {},
 });
@@ -18,6 +20,7 @@ export const AppStateContextProvider = (props) => {
   const [theme, setTheme] = useState("light");
   const [categories, setCategories] = useState({});
   const [entries, setEntries] = useState({});
+  const [random, setRandom] = useState({});
   const [searchOpts, setSearchOpts] = useState(SEARCH_OPTS);
   const initialMountState = useRef(true);
 
@@ -58,7 +61,7 @@ export const AppStateContextProvider = (props) => {
     if (isObjectEmpty(categories)) {
       try {
         const categories = await getCategories();
-        setCategories(categories);
+        setCategories(() => categories);
       } catch (err) {
         console.error(err);
       }
@@ -71,14 +74,21 @@ export const AppStateContextProvider = (props) => {
     try {
       const entries = await getEntries(params);
       setEntries(entries);
-      // console.log(entries);
     } catch (err) {
       console.error(err);
     }
   };
 
+  const fetchRandom = async (params = {}) => {
+    try {
+      const entry = await getRandom(params);
+      setRandom(() => entry);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   const changeSearchOpts = (opts) => {
-    // console.log(opts)
     setSearchOpts((prevStateObj) => {
       const newOpts = { ...prevStateObj, ...opts };
       localStorage.setItem("searchOpts", JSON.stringify(newOpts));
@@ -95,6 +105,8 @@ export const AppStateContextProvider = (props) => {
         setCategories: fetchCategories,
         entries: entries,
         setEntries: fetchEntries,
+        random: random,
+        setRandom: fetchRandom,
         searchOpts: searchOpts,
         setSearchOpts: changeSearchOpts,
       }}
