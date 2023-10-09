@@ -3,7 +3,6 @@ import Filter from "../../components/Filter/Filter";
 import "./random.scss";
 import { Button, CircularProgress } from "@mui/material";
 import AppStateContext from "../../services/app-state-context";
-import LazyAPIs from "../../components/LazyAPIs/LazyAPIs";
 import ApiCard from "../../components/ApiCard/ApiCard";
 
 const Random = () => {
