@@ -82,7 +82,7 @@ export const AppStateContextProvider = (props) => {
   const fetchRandom = async (params = {}) => {
     try {
       const entry = await getRandom(params);
-      setRandom(() => entry);
+      setRandom(entry);
     } catch (err) {
       console.error(err);
     }

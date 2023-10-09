@@ -4,6 +4,7 @@ import "./random.scss";
 import { Button, CircularProgress } from "@mui/material";
 import AppStateContext from "../../services/app-state-context";
 import LazyAPIs from "../../components/LazyAPIs/LazyAPIs";
+import ApiCard from "../../components/ApiCard/ApiCard";
 
 const Random = () => {
   const ctx = useContext(AppStateContext);
@@ -37,7 +38,23 @@ const Random = () => {
       <Button style={{ left: "45%" }} onClick={() => setRandom()}>
         Find Again
       </Button>
-      <LazyAPIs entries={random} />
+      <div className="random__card">
+      {random &&
+        random.entries.map(
+          ({ API, Auth, Category, Cors, Description, HTTPS, Link }, idx) => (
+            <ApiCard
+              key={`${Link}${idx}`}
+              API={API}
+              Auth={Auth}
+              Category={Category}
+              Cors={Cors}
+              Description={Description}
+              HTTPS={HTTPS}
+              Link={Link}
+            />
+          )
+        )}
+      </div>
     </div>
   );
 };
